@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="container">
+      <!-- header top -->
       <div class="py-6 flex justify-between items-center">
         <!-- logo -->
         <Logo />
@@ -37,7 +38,43 @@
             <span>Account</span>
           </nuxt-link>
         </div>
-
+      </div>
+      <!-- header-bottom -->
+      <div class="flex items-center">
+        <!-- all category list -->
+        <div v-click-outside="menuClose" class="w-96 relative">
+          <div @click.prevent="menuClick" class="bs-dark-green-bg relative z-20 flex rounded-full px-4 py-2 cursor-pointer">
+            <div class="min-w-max">
+              <img src="~/assets/img/menu-right.png" alt="menu-right">
+            </div>
+            <div class="w-full text-center px-6 text-white">
+              All Categories
+            </div>
+            <div class="min-w-max">
+              <img src="~/assets/img/chevron-down.png" alt="chevron-down">
+            </div>
+          </div>
+          <div v-bind:class="allCategoryMenu ? 'block visible' : 'hidden invisible'" class="absolute bs-dark-green-bg z-10 w-full -mt-5 pt-6 pb-4 rounded-b-2xl">
+            <ul>
+                <li><nuxt-link class="block text-white py-2 px-4 hover:text-black" to="/">Fruits</nuxt-link></li>
+                <li><nuxt-link class="block text-white py-2 px-4 hover:text-black" to="/">Vegetables</nuxt-link></li>
+              </ul>
+          </div>
+        </div>
+        <!-- menu list -->
+        <div class="w-full">
+          <ul class="flex justify-center">
+            <li><nuxt-link class="p-4" to="/">Home</nuxt-link></li>
+            <li><nuxt-link class="p-4" to="/about">About</nuxt-link></li>
+            <li><nuxt-link class="p-4" to="/contact">Contact</nuxt-link></li>
+            <li><nuxt-link class="p-4" to="/faqs">FAQs</nuxt-link></li>
+            <li><nuxt-link class="p-4" to="/order-tracking">Order Tracking</nuxt-link></li>
+          </ul>
+        </div>
+        <!-- special offer -->
+        <nuxt-link to="/offers" class="min-w-max bs-dark-orange-color flex">
+          <img src="~/assets/img/u_percentage.png" class="mr-3" alt=""> Special Offers!
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -54,5 +91,13 @@
         count: 0
       }
     },
+    methods: {
+      menuClick() {
+        this.allCategoryMenu = !this.allCategoryMenu;
+      },
+      menuClose() {
+        this.allCategoryMenu = false
+      },
+    }
   }
 </script>
